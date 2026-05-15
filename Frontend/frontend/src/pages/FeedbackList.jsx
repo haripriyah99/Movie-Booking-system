@@ -5,14 +5,14 @@ export default function FeedbackList() {
 
   const [feedbacks, setFeedbacks] = useState([]);
 
-  // ✅ Load feedbacks
+  // Load feedbacks
   useEffect(() => {
 
     fetchFeedbacks();
 
   }, []);
 
-  // ✅ Fetch feedbacks
+  // Fetch feedbacks
   const fetchFeedbacks = async () => {
 
     try {
@@ -30,7 +30,7 @@ export default function FeedbackList() {
     }
   };
 
-  // ✅ Reply feedback
+  //  Reply feedback
   const sendReply = async (id, reply) => {
 
     if (!reply) {
@@ -49,7 +49,7 @@ export default function FeedbackList() {
         }
       );
 
-      alert("✅ Reply Sent");
+      alert("Reply Sent");
 
       fetchFeedbacks();
 

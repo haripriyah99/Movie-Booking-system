@@ -10,7 +10,7 @@ export default function Login() {
 
   const [password, setPassword] = useState("");
 
-  // ✅ Login Function
+  //  Login Function
   const handleLogin = async () => {
 
     console.log("Login button clicked");

@@ -19,14 +19,7 @@ class ShowTimeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ShowTime
-        fields = [
-            'id',
-            'movie',
-            'movie_title',
-            'theater',
-            'theater_name',
-            'time'
-        ]
+        fields = "__all__"
 class TheaterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Theater

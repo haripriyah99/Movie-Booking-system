@@ -15,7 +15,7 @@ export default function AddTheater() {
         location
       });
 
-      alert("✅ Theater Added");
+      alert(" Theater Added");
 
       setName("");
       setLocation("");

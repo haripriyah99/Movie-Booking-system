@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
+  const [search,setSearch]=useState("");
   const nav = useNavigate();
 
   useEffect(() => {
@@ -12,6 +13,17 @@ export default function Movies() {
       .then(res => setMovies(res.data))
       .catch(err => console.log(err));
   }, []);
+
+ const filteredMovies =
+  movies.filter((movie) =>
+
+    movie.title
+      .toLowerCase()
+      .includes(
+        search.toLowerCase()
+      )
+  );
+
 
   return (
     <div className="bg-black min-h-screen text-white">
@@ -29,24 +41,43 @@ export default function Movies() {
         </p>
       </div>
 
+<div className="mb-10">
+
+  <input
+    type="text"
+
+    placeholder="Search movies..."
+
+    value={search}
+
+    onChange={(e) =>
+      setSearch(e.target.value)
+    }
+
+    className="w-full p-4 rounded-xl bg-zinc-600 text-white border border-zinc-700 focus:outline-none focus:border-red-600"
+  />
+
+</div>
+
       {/* Movies Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 p-8">
 
-        {movies.map(movie => (
+        {filteredMovies.map(movie => (
           <div
             key={movie.id}
             className="bg-zinc-900 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition duration-300"
           >
+            
             {/* Fake Poster */}
             <div className="h-72 bg-gray-700 flex items-center justify-center text-2xl">
 
-              🎬
+            
               <img
   src={`http://127.0.0.1:8000${movie.poster}`}
-
+alt={movie.title}
  
 
-  className="w-full h-80 object-cover rounded-xl"
+  className="w-full h-72 object-cover "
 />
             </div>
 

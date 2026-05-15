@@ -6,14 +6,14 @@ export default function Announcements() {
   const [announcements, setAnnouncements] =
     useState([]);
 
-  // ✅ Load announcements
+  //  Load announcements
   useEffect(() => {
 
     fetchAnnouncements();
 
   }, []);
 
-  // ✅ Fetch data
+  // Fetch data
   const fetchAnnouncements = async () => {
 
     try {

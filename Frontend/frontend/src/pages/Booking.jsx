@@ -6,12 +6,13 @@ export default function Booking() {
 
   const { id } = useParams();
 
-  // ✅ States
-  const [location,setLocation]=useState("");
+  // States
+  
   const [theaters,setTheaters]=useState([]);
   const [selectedTheater, setselectedTheater] = useState("");
 
   const [shows,setShows]=useState([]);
+  const [location,setLocation]=useState("");
 
   const [selectedShow, setSelectedShow] =
     useState("");
@@ -22,7 +23,7 @@ export default function Booking() {
   const [bookedSeats, setBookedSeats] =
     useState([]);
 
-  // ✅ Seat Layout
+  //Seat Layout
   const rows = [
     "A",
     "B",
@@ -54,7 +55,7 @@ export default function Booking() {
     };
   }
 
-  // ✅ Load Showtimes
+  // Load Showtimes
   useEffect(() => {
 
     fetchShows();
@@ -81,7 +82,7 @@ export default function Booking() {
     }
   };
 
-  // ✅ Load Booked Seats
+  // Load Booked Seats
   const fetchBookedSeats = async (
     showId
   ) => {
@@ -132,19 +133,26 @@ export default function Booking() {
     setSelectedShow("");
     fetchShows(theaterId);
   };
-  // ✅ Change Showtime
+  // Change Showtime
   const handleShowChange = (
-    showId
-  ) => {
+  showId
+) => {
 
-    setSelectedShow(showId);
+  const selected =
+    shows.find(
+      (show) =>
+        show.id ==
+        showId
+    );
 
-    setSelectedSeats([]);
+  setSelectedShow(selected);
 
-    fetchBookedSeats(showId);
-  };
+  setSelectedSeats([]);
 
-  // ✅ Select Seat
+  fetchBookedSeats(showId);
+};
+
+  //  Select Seat
   const toggleSeat = (seat) => {
 
     // already booked
@@ -179,7 +187,7 @@ export default function Booking() {
     }
   };
 
-  // ✅ Book Ticket
+  //  Book Ticket
   const bookTicket = async () => {
 
     try {
@@ -223,7 +231,47 @@ export default function Booking() {
       );
     }
   };
+  const totalPrice=selectedSeats.length*Number(selectedShow?.price || 0);
+  
+const handlePayment = async () => {
 
+  try {
+
+    // Fake Payment Success
+    alert(
+      `Payment Successful ₹${totalPrice}`
+    );
+
+    // Save booking
+    await API.post(
+
+      "/bookings/",
+
+      {
+        show:
+          selectedShow.id,
+
+        seats:
+          selectedSeats,
+
+        totalprice:
+          totalPrice
+      }
+    );
+
+    alert(
+      "Booking Confirmed 🎬"
+    );
+
+  } catch (err) {
+
+    console.log(err);
+
+    alert(
+      "Booking Failed"
+    );
+  }
+};
   return (
 
     <div className="bg-black min-h-screen text-white p-10">
@@ -288,7 +336,7 @@ Select Theater
 
       {/* Showtime Dropdown */}
       <select
-        value={selectedShow}
+        value={selectedShow?.id || ""}
 
         onChange={(e) =>
           handleShowChange(
@@ -374,7 +422,50 @@ Select Theater
         ))}
 
       </div>
+<div className="mt-8">
 
+  <h2 className="
+    text-2xl
+    font-bold
+    text-white
+    mb-4
+  ">
+
+    Price Per Seat:
+    ₹{selectedShow?.price || 0}
+  </h2>
+
+  <h2 className="
+    text-3xl
+    font-bold
+    text-red-500
+    mb-6
+  ">
+
+    Total:
+    ₹{totalPrice}
+
+  </h2>
+
+  <button
+    onClick={handlePayment}
+
+    className="
+      bg-green-600
+      hover:bg-green-700
+      px-8
+      py-3
+      rounded-xl
+      text-white
+      font-bold
+    "
+  >
+
+    Pay ₹{totalPrice}
+
+  </button>
+
+</div>
       {/* Legend */}
       <div className="flex gap-8 mt-10 flex-wrap">
 

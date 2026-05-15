@@ -6,5 +6,5 @@ class BookingSerializer(serializers.ModelSerializer):
         model = Booking
         fields = '__all__'
         extra_kwargs = {
-            'user': {'read_only': True}   # ✅ IMPORTANT
+            'user': {'read_only': True}   
         }

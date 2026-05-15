@@ -7,7 +7,7 @@ export default function Feedback() {
 
   const [feedbacks, setFeedbacks] = useState([]);
 
-  // ✅ Load user feedbacks
+  //  Load user feedbacks
   useEffect(() => {
 
     fetchFeedbacks();
@@ -30,7 +30,7 @@ export default function Feedback() {
 
   };
 
-  // ✅ Send feedback
+  //  Send feedback
   const sendFeedback = async () => {
 
     if (!message) {

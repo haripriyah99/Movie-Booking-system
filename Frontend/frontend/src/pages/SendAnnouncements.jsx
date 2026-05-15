@@ -9,7 +9,7 @@ export default function SendAnnouncements() {
   const [content, setContent] =
     useState("");
 
-  // ✅ Send announcement
+  //  Send announcement
   const sendAnnouncement = async () => {
 
     if (!title || !content) {
@@ -30,7 +30,7 @@ export default function SendAnnouncements() {
       );
 
       alert(
-        "✅ Announcement Sent"
+        "Announcement Sent"
       );
 
       setTitle("");
